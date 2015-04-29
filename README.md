@@ -1,5 +1,5 @@
 #paysharesd - Payshares P2P server
-[![Build Status](https://travis-ci.org/payshares/paysharesd.svg?branch=master)](https://travis-ci.org/payshares/paysharesd)
+[![Build Status](https://travis-ci.org/payshares/paysharesd.svg?branch=master)](https://travis-ci.org/Payshares/paysharesd)
 
 This is the repository for Payshares's `paysharesd`, reference P2P server.
 
