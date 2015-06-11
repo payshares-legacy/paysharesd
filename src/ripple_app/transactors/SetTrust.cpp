@@ -338,7 +338,7 @@ TER TrustSetTransactor::doApply ()
             m_journal.trace <<
                 "Delay transaction: Insufficient reserve to add trust line.";
 
-            // Another transaction could provide XPR to the account and then
+            // Another transaction could provide XPS to the account and then
             // this transaction would succeed.
             terResult   = tecINSUF_RESERVE_LINE;
         }

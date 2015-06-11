@@ -51,11 +51,11 @@ const std::uint32_t tfUniversalMask        = ~ tfUniversal;
 const std::uint32_t tfOptionalDestTag      = 0x00020000;
 const std::uint32_t tfRequireAuth          = 0x00040000;
 const std::uint32_t tfOptionalAuth         = 0x00080000;
-const std::uint32_t tfDisallowXPR          = 0x00100000;
-const std::uint32_t tfAllowXPR             = 0x00200000;
+const std::uint32_t tfDisallowXPS          = 0x00100000;
+const std::uint32_t tfAllowXPS             = 0x00200000;
 const std::uint32_t tfAccountSetMask       = ~ (tfUniversal | TxFlag::requireDestTag | tfOptionalDestTag
                                              | tfRequireAuth | tfOptionalAuth
-                                             | tfDisallowXPR | tfAllowXPR);
+                                             | tfDisallowXPS | tfAllowXPS);
 
 // AccountSet SetFlag/ClearFlag values
 const std::uint32_t asfRequireDest         = 1;

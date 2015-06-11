@@ -142,11 +142,11 @@ bool PathRequest::isValid (RippleLineCache::ref crCache)
             if (!asDst)
             {
                 // no destination account
-                jvDestCur.append (Json::Value ("XPR"));
+                jvDestCur.append (Json::Value ("XPS"));
 
                 if (!saDstAmount.isNative ())
                 {
-                    // only XPR can be send to a non-existent account
+                    // only XPS can be send to a non-existent account
                     bValid = false;
                     jvStatus = rpcError (rpcACT_NOT_FOUND);
                 }
@@ -159,9 +159,9 @@ bool PathRequest::isValid (RippleLineCache::ref crCache)
             }
             else
             {
-                bool includeXPR = !is_bit_set (asDst->peekSLE ().getFlags(), lsfDisallowXPR);
+                bool includeXPS = !is_bit_set (asDst->peekSLE ().getFlags(), lsfDisallowXPS);
                 boost::unordered_set<uint160> usDestCurrID =
-                    usAccountDestCurrencies (raDstAccount, crCache, includeXPR);
+                    usAccountDestCurrencies (raDstAccount, crCache, includeXPS);
 
                 BOOST_FOREACH (const uint160 & uCurrency, usDestCurrID)
                     jvDestCur.append (STAmount::createHumanCurrency (uCurrency));
@@ -348,7 +348,7 @@ Json::Value PathRequest::doUpdate (RippleLineCache::ref cache, bool fast)
             if (!sameAccount || (c != saDstAmount.getCurrency ()))
             {
                 if (c.isZero ())
-                    sourceCurrencies.insert (std::make_pair (c, ACCOUNT_XPR));
+                    sourceCurrencies.insert (std::make_pair (c, ACCOUNT_XPS));
                 else
                     sourceCurrencies.insert (std::make_pair (c, raSrcAccount.getAccountID ()));
             }
@@ -419,7 +419,7 @@ Json::Value PathRequest::doUpdate (RippleLineCache::ref cache, bool fast)
             STAmount                            saDstAmountAct;
             STAmount                            saMaxAmount (currIssuer.first,
                     currIssuer.second.isNonZero () ? currIssuer.second :
-                    (currIssuer.first.isZero () ? ACCOUNT_XPR : raSrcAccount.getAccountID ()), 1);
+                    (currIssuer.first.isZero () ? ACCOUNT_XPS : raSrcAccount.getAccountID ()), 1);
             saMaxAmount.negate ();
             m_journal.debug << iIdentifier << " Paths found, calling rippleCalc";
             TER terResult = RippleCalc::rippleCalc (lesSandbox, saMaxAmountAct, saDstAmountAct,

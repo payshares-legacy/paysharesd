@@ -174,7 +174,7 @@ suite("Offer tests", function() {
       });
     });
 
-  test("offer create then crossing offer with XPR. Negative balance.", function (done) {
+  test("offer create then crossing offer with XPS. Negative balance.", function (done) {
       var self = this;
 
       var alices_initial_balance = 499946999680;
@@ -238,7 +238,7 @@ suite("Offer tests", function() {
           self.what = "Create first offer.";
 
           $.remote.transaction()
-            .offer_create("alice", "50/USD/mtgox", "150000.0")    // get 50/USD pay 150000/XPR
+            .offer_create("alice", "50/USD/mtgox", "150000.0")    // get 50/USD pay 150000/XPS
               .once('proposed', function (m) {
                   // console.log("PROPOSED: offer_create: %s", JSON.stringify(m));
 
@@ -287,7 +287,7 @@ suite("Offer tests", function() {
           self.what = "Create crossing offer.";
 
           $.remote.transaction()
-            .offer_create("bob", "2000.0", "1/USD/mtgox")  // get 2,000/XPR pay 1/USD (has insufficient USD)
+            .offer_create("bob", "2000.0", "1/USD/mtgox")  // get 2,000/XPS pay 1/USD (has insufficient USD)
               .once('proposed', function (m) {
                   // console.log("PROPOSED: offer_create: %s", JSON.stringify(m));
                   tx_verify.push(m.tx_json);
@@ -355,7 +355,7 @@ suite("Offer tests", function() {
       });
     });
 
-  test("offer create then crossing offer with XPR. Reverse order." , function (done) {
+  test("offer create then crossing offer with XPS. Reverse order." , function (done) {
       var self = this;
 
       async.waterfall([
@@ -387,7 +387,7 @@ suite("Offer tests", function() {
           self.what = "Create first offer.";
 
           $.remote.transaction()
-            .offer_create("bob", "1/USD/mtgox", "4000.0")         // get 1/USD pay 4000/XPR : offer pays 4000 XPR for 1 USD
+            .offer_create("bob", "1/USD/mtgox", "4000.0")         // get 1/USD pay 4000/XPS : offer pays 4000 XPS for 1 USD
               .on('submitted', function (m) {
                   // console.log("PROPOSED: offer_create: %s", JSON.stringify(m));
 
@@ -401,10 +401,10 @@ suite("Offer tests", function() {
 
           // Existing offer pays better than this wants.
           // Fully consume existing offer.
-          // Pay 1 USD, get 4000 XPR.
+          // Pay 1 USD, get 4000 XPS.
 
           $.remote.transaction()
-            .offer_create("alice", "150000.0", "50/USD/mtgox")  // get 150,000/XPR pay 50/USD : offer pays 1 USD for 3000 XPR
+            .offer_create("alice", "150000.0", "50/USD/mtgox")  // get 150,000/XPS pay 50/USD : offer pays 1 USD for 3000 XPS
               .on('submitted', function (m) {
                   // console.log("PROPOSED: offer_create: %s", JSON.stringify(m));
 
@@ -442,7 +442,7 @@ suite("Offer tests", function() {
       });
     });
 
-  test("offer create then crossing offer with XPR.", function (done) {
+  test("offer create then crossing offer with XPS.", function (done) {
       var self = this;
 
       async.waterfall([
@@ -474,7 +474,7 @@ suite("Offer tests", function() {
           self.what = "Create first offer.";
 
           $.remote.transaction()
-            .offer_create("alice", "150000.0", "50/USD/mtgox")  // pays 1 USD for 3000 XPR
+            .offer_create("alice", "150000.0", "50/USD/mtgox")  // pays 1 USD for 3000 XPS
               .on('submitted', function (m) {
                   // console.log("PROPOSED: offer_create: %s", JSON.stringify(m));
 
@@ -487,7 +487,7 @@ suite("Offer tests", function() {
           self.what = "Create crossing offer.";
 
           $.remote.transaction()
-            .offer_create("bob", "1/USD/mtgox", "4000.0") // pays 4000 XPR for 1 USD
+            .offer_create("bob", "1/USD/mtgox", "4000.0") // pays 4000 XPS for 1 USD
               .on('submitted', function (m) {
                   // console.log("PROPOSED: offer_create: %s", JSON.stringify(m));
 
@@ -501,7 +501,7 @@ suite("Offer tests", function() {
 
           // New offer pays better than old wants.
           // Fully consume new offer.
-          // Pay 1 USD, get 3000 XPR.
+          // Pay 1 USD, get 3000 XPS.
 
           testutils.verify_balances($.remote,
             {
@@ -528,7 +528,7 @@ suite("Offer tests", function() {
       });
     });
 
-  test("offer create then crossing offer with XPR with limit override.", function (done) {
+  test("offer create then crossing offer with XPS with limit override.", function (done) {
       var self = this;
 
       async.waterfall([
@@ -562,7 +562,7 @@ suite("Offer tests", function() {
           self.what = "Create first offer.";
 
           $.remote.transaction()
-            .offer_create("alice", "150000.0", "50/USD/mtgox")  // 300 XPR = 1 USD
+            .offer_create("alice", "150000.0", "50/USD/mtgox")  // 300 XPS = 1 USD
               .on('submitted', function (m) {
                   // console.log("PROPOSED: offer_create: %s", JSON.stringify(m));
 
@@ -889,7 +889,7 @@ suite("Offer tests", function() {
   } );
 
   test("ripple currency conversion : entire offer", function (done) {
-    // mtgox in, XPR out
+    // mtgox in, XPS out
       var self = this;
       var seq;
 
@@ -965,7 +965,7 @@ suite("Offer tests", function() {
             testutils.verify_offer($.remote, "bob", seq, "100/USD/mtgox", "500", callback);
           },
           function (callback) {
-            self.what = "Alice converts USD to XPR.";
+            self.what = "Alice converts USD to XPS.";
 
             $.remote.transaction()
               .payment("alice", "alice", "500")
@@ -1093,8 +1093,8 @@ suite("Offer cross currency", function() {
     testutils.build_teardown().call($, done);
   });
 
-  test("ripple cross currency payment - start with XPR", function (done) {
-    // alice --> [XPR --> carol --> USD/mtgox] --> bob
+  test("ripple cross currency payment - start with XPS", function (done) {
+    // alice --> [XPS --> carol --> USD/mtgox] --> bob
       var self = this;
       var seq;
 
@@ -1141,7 +1141,7 @@ suite("Offer cross currency", function() {
           },
           function ( callback ) { testutils.ledger_close( $.remote, callback ); },
           function (callback) {
-            self.what = "Alice send USD/mtgox converting from XPR.";
+            self.what = "Alice send USD/mtgox converting from XPS.";
 
             $.remote.transaction()
               .payment("alice", "bob", "25/USD/mtgox")
@@ -1176,8 +1176,8 @@ suite("Offer cross currency", function() {
         });
     });
 
-  test("ripple cross currency payment - end with XPR", function (done) {
-    // alice --> [USD/mtgox --> carol --> XPR] --> bob
+  test("ripple cross currency payment - end with XPS", function (done) {
+    // alice --> [USD/mtgox --> carol --> XPS] --> bob
       var self = this;
       var seq;
 
@@ -1225,7 +1225,7 @@ suite("Offer cross currency", function() {
           },
           function ( callback ) { testutils.ledger_close( $.remote, callback ); },
           function (callback) {
-            self.what = "Alice send XPR to bob converting from USD/mtgox.";
+            self.what = "Alice send XPS to bob converting from USD/mtgox.";
 
             $.remote.transaction()
               .payment("alice", "bob", "250")
@@ -1261,7 +1261,7 @@ suite("Offer cross currency", function() {
     });
 
   test("ripple cross currency bridged payment", function (done) {
-    // alice --> [USD/mtgox --> carol --> XPR] --> [XPR --> dan --> EUR/bitstamp] --> bob
+    // alice --> [USD/mtgox --> carol --> XPS] --> [XPS --> dan --> EUR/bitstamp] --> bob
       var self = this;
       var seq_carol;
       var seq_dan;
@@ -1330,7 +1330,7 @@ suite("Offer cross currency", function() {
             $.remote.transaction()
               .payment("alice", "bob", "30/EUR/bitstamp")
               .send_max("333/USD/mtgox")
-              .path_add( [ { currency: "XPR" } ])
+              .path_add( [ { currency: "XPS" } ])
               .once('submitted', function (m) {
                   //console.log("PROPOSED: %s", JSON.stringify(m));
 
@@ -1406,15 +1406,15 @@ suite("Offer tests 3", function() {
             var fee_units_for_all_txs = ( Transaction.fee_units["default"] *
                                           max_txs_per_user );
 
-            starting_XPR = reserve_amount.add($.remote.fee_tx(fee_units_for_all_txs))
-            // console.log("starting_XPR after %s fee units: ",  fee_units_for_all_txs, starting_XPR.to_human());
+            starting_XPS = reserve_amount.add($.remote.fee_tx(fee_units_for_all_txs))
+            // console.log("starting_XPS after %s fee units: ",  fee_units_for_all_txs, starting_XPS.to_human());
 
-            starting_XPR = starting_XPR.add(Amount.from_json('100.0'));
-            // console.log("starting_XPR adding 100 XPR to sell", starting_XPR.to_human());
+            starting_XPS = starting_XPS.add(Amount.from_json('100.0'));
+            // console.log("starting_XPS adding 100 XPS to sell", starting_XPS.to_human());
 
             testutils.create_accounts($.remote,
                 "root",
-                starting_XPR.to_json(),
+                starting_XPS.to_json(),
                 ["alice", "bob", "mtgox", "amazon", "bitstamp"],
                 callback);
           },
@@ -1704,12 +1704,12 @@ suite("Offer tfSell", function() {
           function (callback) {
             // Provide micro amounts to compensate for fees to make results round nice.
             self.what = "Create accounts.";
-            var starting_XPR = $.amount_for({
+            var starting_XPS = $.amount_for({
               ledger_entries: 1,
               default_transactions: 2,
               extra: '100.0'
             });
-            testutils.create_accounts($.remote, "root", starting_XPR, ["alice", "bob", "mtgox"], callback);
+            testutils.create_accounts($.remote, "root", starting_XPS, ["alice", "bob", "mtgox"], callback);
           },
           function (callback) {
             self.what = "Set limits.";
@@ -1733,7 +1733,7 @@ suite("Offer tfSell", function() {
           function (callback) {
             self.what = "Create offer bob.";
 
-            // Taker pays 200 XPR for 100 USD.
+            // Taker pays 200 XPS for 100 USD.
             // Selling USD.
             $.remote.transaction()
               .offer_create("bob", "100.0", "200/USD/mtgox")
@@ -1749,9 +1749,9 @@ suite("Offer tfSell", function() {
             // Ask for more than available to prove reserve works.
             self.what = "Create offer alice.";
 
-            // Taker pays 100 USD for 100 XPR.
-            // Selling XPR.
-            // Will sell all 100 XPR and get more USD than asked for.
+            // Taker pays 100 USD for 100 XPS.
+            // Selling XPS.
+            // Will sell all 100 XPS and get more USD than asked for.
             $.remote.transaction()
               .offer_create("alice", "100/USD/mtgox", "100.0")
               .set_flags('Sell')
@@ -1812,13 +1812,13 @@ suite("Client Issue #535", function() {
             // Provide micro amounts to compensate for fees to make results round nice.
             self.what = "Create accounts.";
 
-            var starting_XPR = $.amount_for({
+            var starting_XPS = $.amount_for({
               ledger_entries: 1,
               default_transactions: 2,
               extra: '100.0'
             });
 
-            testutils.create_accounts($.remote, "root", starting_XPR, ["alice", "bob", "mtgox"], callback);
+            testutils.create_accounts($.remote, "root", starting_XPS, ["alice", "bob", "mtgox"], callback);
           },
           function (callback) {
             self.what = "Set limits.";

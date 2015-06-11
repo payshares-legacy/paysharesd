@@ -71,7 +71,7 @@ LedgerDump::dumpLedger (int ledgerNum)
     app->setup ();
     auto &lm = app->getLedgerMaster ();
     auto ledger = lm.getLedgerBySeq (ledgerNum);
-    std::cout << ledger->getJson (LEDGER_JSON_DUMP_TXPR|
+    std::cout << ledger->getJson (LEDGER_JSON_DUMP_TXPS|
                                   LEDGER_JSON_EXPAND) << std::endl;
     exit (0);
 }

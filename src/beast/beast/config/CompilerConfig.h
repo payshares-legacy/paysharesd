@@ -45,9 +45,9 @@
 /** This macro fixes C++'s constexpr for VS2012, which doesn't understand it.
 */
 #if BEAST_MSVC
-# define BEAST_CONSTEXPR const
+# define BEAST_CONSTEXPS const
 #else
-# define BEAST_CONSTEXPR constexpr
+# define BEAST_CONSTEXPS constexpr
 #endif
 
 

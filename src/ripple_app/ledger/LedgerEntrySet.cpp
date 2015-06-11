@@ -1688,7 +1688,7 @@ TER LedgerEntrySet::accountSend (const uint160& uSenderID, const uint160& uRecei
     }
     else if (saAmount.isNative ())
     {
-        // XPR send which does not check reserve and can do pure adjustment.
+        // XPS send which does not check reserve and can do pure adjustment.
         SLE::pointer sleSender = !!uSenderID
             ? entryCache (ltACCOUNT_ROOT, Ledger::getAccountRootIndex (uSenderID))
             : SLE::pointer ();
@@ -1723,7 +1723,7 @@ TER LedgerEntrySet::accountSend (const uint160& uSenderID, const uint160& uRecei
             }
             else
             {
-                // Decrement XPR balance.
+                // Decrement XPS balance.
                 sleSender->setFieldAmount (sfBalance,
                     sleSender->getFieldAmount (sfBalance) - saAmount);
                 entryModify (sleSender);
@@ -1732,7 +1732,7 @@ TER LedgerEntrySet::accountSend (const uint160& uSenderID, const uint160& uRecei
 
         if (tesSUCCESS == terResult && sleReceiver)
         {
-            // Increment XPR balance.
+            // Increment XPS balance.
             sleReceiver->setFieldAmount (sfBalance,
                 sleReceiver->getFieldAmount (sfBalance) + saAmount);
             entryModify (sleReceiver);

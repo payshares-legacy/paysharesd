@@ -59,7 +59,7 @@ TER WalletAddTransactor::doApply ()
         return tefCREATED;
     }
 
-    // Direct XPR payment.
+    // Direct XPS payment.
 
     STAmount saDstAmount = mTxn.getFieldAmount (sfAmount);
     STAmount saPaid = mTxn.getTransactionFee ();

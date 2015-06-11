@@ -140,7 +140,7 @@ suite('Merging accounts', function() {
 
   function checks_mergeSuccess( t ) {
   	return [function ( callback ) {
-  		t.what = "Check bob's XPR balance";
+  		t.what = "Check bob's XPS balance";
 
   		$.remote.requestAccountBalance( $.remote.account( 'bob' )._account_id, 'current', null )
 		  .on( 'success', function ( m ) {
@@ -176,7 +176,7 @@ suite('Merging accounts', function() {
 
   function checks_mergefail( t, get_expected ) {
   	return [function ( callback ) {
-  		t.what = "Check bob's XPR balance";
+  		t.what = "Check bob's XPS balance";
 
   		$.remote.requestAccountBalance( $.remote.account( 'bob' )._account_id, 'current', null )
 		  .on( 'success', function ( m ) {

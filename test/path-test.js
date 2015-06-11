@@ -561,9 +561,9 @@ suite('More path finding', function() {
       testutils.build_teardown().call($, done);
     });
 
-    //carol holds mtgoxAUD, sells mtgoxAUD for XPR
+    //carol holds mtgoxAUD, sells mtgoxAUD for XPS
       //bob will hold mtgoxAUD
-    //alice pays bob mtgoxAUD using XPR
+    //alice pays bob mtgoxAUD using XPS
     test("via gateway", function (done) {
       var self = this;
 
@@ -616,7 +616,7 @@ suite('More path finding', function() {
         .submit();
       },
       function (callback) {
-        self.what = "Alice sends bob 10/AUD/mtgox using XPR.";
+        self.what = "Alice sends bob 10/AUD/mtgox using XPS.";
 
         //XXX Also try sending 10/AUX/bob
         $.remote.transaction()
@@ -671,10 +671,10 @@ suite('More path finding', function() {
       });
     });
 
-    //carol holds mtgoxAUD, sells mtgoxAUD for XPR
+    //carol holds mtgoxAUD, sells mtgoxAUD for XPS
     //bob will hold mtgoxAUD
-    //alice pays bob mtgoxAUD using XPR
-    test("via gateway : FIX ME fails due to XPR rounding and not properly handling dry.", function (done) {
+    //alice pays bob mtgoxAUD using XPS
+    test("via gateway : FIX ME fails due to XPS rounding and not properly handling dry.", function (done) {
       return done();
 
       var self = this;
@@ -728,7 +728,7 @@ suite('More path finding', function() {
         .submit();
       },
       function (callback) {
-        self.what = "Alice sends bob 10/AUD/mtgox using XPR.";
+        self.what = "Alice sends bob 10/AUD/mtgox using XPS.";
 
         // XXX Also try sending 10/AUX/bob
         $.remote.transaction()

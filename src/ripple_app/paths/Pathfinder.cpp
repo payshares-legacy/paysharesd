@@ -39,18 +39,18 @@ TODO: what is a good way to come up with multiple paths?
 
 
 OrderDB:
-    getXPROffers();
+    getXPSOffers();
 
-    // return list of all orderbooks that want XPR
+    // return list of all orderbooks that want XPS
     // return list of all orderbooks that want IssuerID
     // return list of all orderbooks that want this issuerID and currencyID
 */
 
 /*
-Test sending to XPR
-Test XPR to XPR
+Test sending to XPS
+Test XPS to XPS
 Test offer in middle
-Test XPR to USD
+Test XPS to USD
 Test USD to EUR
 */
 
@@ -157,38 +157,38 @@ bool Pathfinder::findPaths (int iLevel, const unsigned int iMaxPaths, STPathSet&
 
     PaymentType paymentType;
     if (bSrcXrp && bDstXrp)
-    { // XPR -> XPR
+    { // XPS -> XPS
 
-        WriteLog (lsDEBUG, Pathfinder) << "XPR to XPR payment";
-        paymentType = pt_XPR_to_XPR;
+        WriteLog (lsDEBUG, Pathfinder) << "XPS to XPS payment";
+        paymentType = pt_XPS_to_XPS;
 
     }
     else if (bSrcXrp)
-    { // XPR -> non-XPR
+    { // XPS -> non-XPS
 
-        WriteLog (lsDEBUG, Pathfinder) << "XPR to non-X{R payment";
-        paymentType = pt_XPR_to_nonXPR;
+        WriteLog (lsDEBUG, Pathfinder) << "XPS to non-X{R payment";
+        paymentType = pt_XPS_to_nonXPS;
 
     }
     else if (bDstXrp)
-    { // non-XPR -> XPR
+    { // non-XPS -> XPS
 
-        WriteLog (lsDEBUG, Pathfinder) << "non-XPR to XPR payment";
-        paymentType = pt_nonXPR_to_XPR;
+        WriteLog (lsDEBUG, Pathfinder) << "non-XPS to XPS payment";
+        paymentType = pt_nonXPS_to_XPS;
 
     }
     else if (mSrcCurrencyID == mDstAmount.getCurrency())
-    { // non-XPR -> non-XPR - Same currency
+    { // non-XPS -> non-XPS - Same currency
 
-        WriteLog (lsDEBUG, Pathfinder) << "non-XPR to non-XPR - same currency";
-        paymentType = pt_nonXPR_to_same;
+        WriteLog (lsDEBUG, Pathfinder) << "non-XPS to non-XPS - same currency";
+        paymentType = pt_nonXPS_to_same;
 
     }
     else
-    { // non-XPR to non-XPR - Different currency
+    { // non-XPS to non-XPS - Different currency
 
-        WriteLog (lsDEBUG, Pathfinder) << "non-XPR to non-XPR - cross currency";
-        paymentType = pt_nonXPR_to_nonXPR;
+        WriteLog (lsDEBUG, Pathfinder) << "non-XPS to non-XPS - cross currency";
+        paymentType = pt_nonXPS_to_nonXPS;
 
     }
 
@@ -398,13 +398,13 @@ STPathSet Pathfinder::filterPaths(int iMaxPaths, STPath& extraPath)
 
 boost::unordered_set<uint160> usAccountSourceCurrencies (
         const RippleAddress& raAccountID, RippleLineCache::ref lrCache,
-        bool includeXPR)
+        bool includeXPS)
 {
     boost::unordered_set<uint160>   usCurrencies;
 
     // YYY Only bother if they are above reserve
-    if (includeXPR)
-        usCurrencies.insert (uint160 (CURRENCY_XPR));
+    if (includeXPS)
+        usCurrencies.insert (uint160 (CURRENCY_XPS));
 
     // List of ripple lines.
     AccountItems& rippleLines (lrCache->getRippleLines (raAccountID.getAccountID ()));
@@ -430,12 +430,12 @@ boost::unordered_set<uint160> usAccountSourceCurrencies (
 boost::unordered_set<uint160> usAccountDestCurrencies (
         const RippleAddress& raAccountID,
         RippleLineCache::ref lrCache,
-        bool includeXPR)
+        bool includeXPS)
 {
     boost::unordered_set<uint160>   usCurrencies;
 
-    if (includeXPR)
-        usCurrencies.insert (uint160 (CURRENCY_XPR)); // Even if account doesn't exist
+    if (includeXPS)
+        usCurrencies.insert (uint160 (CURRENCY_XPS)); // Even if account doesn't exist
 
     // List of ripple lines.
     AccountItems& rippleLines (lrCache->getRippleLines (raAccountID.getAccountID ()));
@@ -568,8 +568,8 @@ STPathSet& Pathfinder::getPaths(PathType_t const& type, bool addComplete)
             addLink(pathsIn, pathsOut, afADD_BOOKS);
             break;
 
-        case nt_XPR_BOOK:
-            addLink(pathsIn, pathsOut, afADD_BOOKS | afOB_XPR);
+        case nt_XPS_BOOK:
+            addLink(pathsIn, pathsOut, afADD_BOOKS | afOB_XPS);
             break;
 
         case nt_DEST_BOOK:
@@ -626,17 +626,17 @@ void Pathfinder::addLink(
     uint160 const& uEndCurrency    = pathEnd.mCurrencyID;
     uint160 const& uEndIssuer      = pathEnd.mIssuerID;
     uint160 const& uEndAccount     = pathEnd.mAccountID;
-    bool const bOnXPR              = uEndCurrency.isZero();
+    bool const bOnXPS              = uEndCurrency.isZero();
 
-    WriteLog (lsTRACE, Pathfinder) << "addLink< flags=" << addFlags << " onXPR=" << bOnXPR;
+    WriteLog (lsTRACE, Pathfinder) << "addLink< flags=" << addFlags << " onXPS=" << bOnXPS;
     WriteLog (lsTRACE, Pathfinder) << currentPath.getJson(0);
 
     if (addFlags & afADD_ACCOUNTS)
     { // add accounts
-        if (bOnXPR)
+        if (bOnXPS)
         {
             if (mDstAmount.isNative() && !currentPath.isEmpty())
-            { // non-default path to XPR destination
+            { // non-default path to XPS destination
                 WriteLog (lsTRACE, Pathfinder) << "complete path found ax: " << currentPath.getJson(0);
                 mCompletePaths.addUniquePath(currentPath);
             }
@@ -730,11 +730,11 @@ void Pathfinder::addLink(
     }
     if (addFlags & afADD_BOOKS)
     { // add order books
-        if (addFlags & afOB_XPR)
-        { // to XPR only
-            if (!bOnXPR && getApp().getOrderBookDB().isBookToXPR(uEndIssuer, uEndCurrency))
+        if (addFlags & afOB_XPS)
+        { // to XPS only
+            if (!bOnXPS && getApp().getOrderBookDB().isBookToXPS(uEndIssuer, uEndCurrency))
             {
-                incompletePaths.assembleAdd(currentPath, STPathElement(STPathElement::typeCurrency, ACCOUNT_XPR, CURRENCY_XPR, ACCOUNT_XPR));
+                incompletePaths.assembleAdd(currentPath, STPathElement(STPathElement::typeCurrency, ACCOUNT_XPS, CURRENCY_XPS, ACCOUNT_XPS));
             }
         }
         else
@@ -745,20 +745,20 @@ void Pathfinder::addLink(
             WriteLog (lsTRACE, Pathfinder) << books.size() << " books found from this currency/issuer";
             BOOST_FOREACH(OrderBook::ref book, books)
             {
-                if (!currentPath.hasSeen (ACCOUNT_XPR, book->getCurrencyOut(), book->getIssuerOut()) &&
+                if (!currentPath.hasSeen (ACCOUNT_XPS, book->getCurrencyOut(), book->getIssuerOut()) &&
                         !matchesOrigin(book->getCurrencyOut(), book->getIssuerOut()) &&
                         (!bDestOnly || (book->getCurrencyOut() == mDstAmount.getCurrency())))
                 {
                     STPath newPath(currentPath);
 
                     if (book->getCurrencyOut().isZero())
-                    { // to XPR
+                    { // to XPS
 
                         // add the order book itself
-                        newPath.addElement(STPathElement(STPathElement::typeCurrency, ACCOUNT_XPR, CURRENCY_XPR, ACCOUNT_XPR));
+                        newPath.addElement(STPathElement(STPathElement::typeCurrency, ACCOUNT_XPS, CURRENCY_XPS, ACCOUNT_XPS));
 
                         if (mDstAmount.getCurrency().isZero())
-                        { // destination is XPR, add account and path is complete
+                        { // destination is XPS, add account and path is complete
                             WriteLog (lsTRACE, Pathfinder) << "complete path found bx: " << currentPath.getJson(0);
                             mCompletePaths.addUniquePath(newPath);
                         }
@@ -769,7 +769,7 @@ void Pathfinder::addLink(
                     { // Don't want the book if we've already seen the issuer
                         // add the order book itself
                         newPath.addElement(STPathElement(STPathElement::typeCurrency | STPathElement::typeIssuer,
-                            ACCOUNT_XPR, book->getCurrencyOut(), book->getIssuerOut()));
+                            ACCOUNT_XPS, book->getCurrencyOut(), book->getIssuerOut()));
 
                         if ((book->getIssuerOut() == mDstAccountID) && book->getCurrencyOut() == mDstAmount.getCurrency())
                         { // with the destination account, this path is complete
@@ -813,7 +813,7 @@ Pathfinder::PathType_t Pathfinder::makePath(char const *string)
                 break;
 
             case 'x': // xrp book
-                ret.push_back(nt_XPR_BOOK);
+                ret.push_back(nt_XPS_BOOK);
                 break;
 
             case 'f': // book to final currency
@@ -847,7 +847,7 @@ std::string Pathfinder::pathTypeToString(PathType_t const& type)
             case nt_BOOKS:
                 ret.append("b");
                 break;
-            case nt_XPR_BOOK:
+            case nt_XPS_BOOK:
                 ret.append("x");
                 break;
             case nt_DEST_BOOK:
@@ -871,15 +871,15 @@ std::string Pathfinder::pathTypeToString(PathType_t const& type)
 
 void Pathfinder::initPathTable()
 { // CAUTION: Do not include rules that build default paths
-    { // XPR to XPR
+    { // XPS to XPS
         // do not remove this - it's necessary to build the table.
-        /*CostedPathList_t& list =*/ mPathTable[pt_XPR_to_XPR];
-//        list.push_back(CostedPath_t(8, makePath("sbxd")));   // source -> book -> book_to_XPR -> destination
-//        list.push_back(CostedPath_t(9, makePath("sbaxd")));  // source -> book -> gateway -> to_XPR ->destination
+        /*CostedPathList_t& list =*/ mPathTable[pt_XPS_to_XPS];
+//        list.push_back(CostedPath_t(8, makePath("sbxd")));   // source -> book -> book_to_XPS -> destination
+//        list.push_back(CostedPath_t(9, makePath("sbaxd")));  // source -> book -> gateway -> to_XPS ->destination
     }
 
-    { // XPR to non-XPR
-        CostedPathList_t& list = mPathTable[pt_XPR_to_nonXPR];
+    { // XPS to non-XPS
+        CostedPathList_t& list = mPathTable[pt_XPS_to_nonXPS];
 
         list.push_back(CostedPath_t(1,  makePath("sfd")));       // source -> book -> gateway
         list.push_back(CostedPath_t(3,  makePath("sfad")));      // source -> book -> account -> destination
@@ -890,19 +890,19 @@ void Pathfinder::initPathTable()
         list.push_back(CostedPath_t(10, makePath("sbafad")));
     }
 
-    { // non-XPR to XPR
-        CostedPathList_t& list = mPathTable[pt_nonXPR_to_XPR];
+    { // non-XPS to XPS
+        CostedPathList_t& list = mPathTable[pt_nonXPS_to_XPS];
 
-        list.push_back(CostedPath_t(1, makePath("sxd")));              // gateway buys XPR
-        list.push_back(CostedPath_t(2, makePath("saxd")));             // source -> gateway -> book(XPR) -> dest
+        list.push_back(CostedPath_t(1, makePath("sxd")));              // gateway buys XPS
+        list.push_back(CostedPath_t(2, makePath("saxd")));             // source -> gateway -> book(XPS) -> dest
         list.push_back(CostedPath_t(6, makePath("saaxd")));
         list.push_back(CostedPath_t(7, makePath("sbxd")));
         list.push_back(CostedPath_t(8, makePath("sabxd")));
         list.push_back(CostedPath_t(9, makePath("sabaxd")));
     }
 
-    { // non-XPR to non-XPR (same currency)
-        CostedPathList_t& list = mPathTable[pt_nonXPR_to_same];
+    { // non-XPS to non-XPS (same currency)
+        CostedPathList_t& list = mPathTable[pt_nonXPS_to_same];
 
         list.push_back(CostedPath_t(1, makePath("sad")));               // source -> gateway -> destination
         list.push_back(CostedPath_t(1, makePath("sfd")));               // source -> book -> destination
@@ -912,13 +912,13 @@ void Pathfinder::initPathTable()
         list.push_back(CostedPath_t(5, makePath("sxfd")));
         list.push_back(CostedPath_t(6, makePath("sxfad")));
         list.push_back(CostedPath_t(6, makePath("safad")));
-        list.push_back(CostedPath_t(6, makePath("saxfd")));             // source -> gateway -> book to XPR -> book -> destination
+        list.push_back(CostedPath_t(6, makePath("saxfd")));             // source -> gateway -> book to XPS -> book -> destination
         list.push_back(CostedPath_t(6, makePath("saxfad")));
         list.push_back(CostedPath_t(7, makePath("saaad")));
     }
 
-    { // non-XPR to non-XPR (different currency)
-        CostedPathList_t& list = mPathTable[pt_nonXPR_to_nonXPR];
+    { // non-XPS to non-XPS (different currency)
+        CostedPathList_t& list = mPathTable[pt_nonXPS_to_nonXPS];
 
         list.push_back(CostedPath_t(1, makePath("sfad")));
         list.push_back(CostedPath_t(1, makePath("safd")));

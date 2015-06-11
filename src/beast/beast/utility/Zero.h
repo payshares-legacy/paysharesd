@@ -49,7 +49,7 @@ struct Zero
 };
 
 namespace {
-static BEAST_CONSTEXPR Zero zero{};
+static BEAST_CONSTEXPS Zero zero{};
 }
 
 /** Default implementation of signum calls the method on the class. */

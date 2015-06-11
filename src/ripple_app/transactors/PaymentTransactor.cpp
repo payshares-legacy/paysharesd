@@ -41,7 +41,7 @@ TER PaymentTransactor::doApply ()
                                       : STAmount (saDstAmount.getCurrency (), mTxnAccountID, saDstAmount.getMantissa (), saDstAmount.getExponent (), saDstAmount.isNegative ());
     const uint160   uSrcCurrency    = saMaxAmount.getCurrency ();
     const uint160   uDstCurrency    = saDstAmount.getCurrency ();
-    const bool      bXPRDirect      = uSrcCurrency.isZero () && uDstCurrency.isZero ();
+    const bool      bXPSDirect      = uSrcCurrency.isZero () && uDstCurrency.isZero ();
 
     WriteLog (lsINFO, PaymentTransactor) << boost::str (boost::format ("Payment> saMaxAmount=%s saDstAmount=%s")
                                          % saMaxAmount.getFullText ()
@@ -96,35 +96,35 @@ TER PaymentTransactor::doApply ()
 
         return temREDUNDANT_SEND_MAX;
     }
-    else if (bXPRDirect && bMax)
+    else if (bXPSDirect && bMax)
     {
-        WriteLog (lsINFO, PaymentTransactor) << "Payment: Malformed transaction: SendMax specified for XPR to XPR.";
+        WriteLog (lsINFO, PaymentTransactor) << "Payment: Malformed transaction: SendMax specified for XPS to XPS.";
 
-        return temBAD_SEND_XPR_MAX;
+        return temBAD_SEND_XPS_MAX;
     }
-    else if (bXPRDirect && bPaths)
+    else if (bXPSDirect && bPaths)
     {
-        WriteLog (lsINFO, PaymentTransactor) << "Payment: Malformed transaction: Paths specified for XPR to XPR.";
+        WriteLog (lsINFO, PaymentTransactor) << "Payment: Malformed transaction: Paths specified for XPS to XPS.";
 
-        return temBAD_SEND_XPR_PATHS;
+        return temBAD_SEND_XPS_PATHS;
     }
-    else if (bXPRDirect && bPartialPayment)
+    else if (bXPSDirect && bPartialPayment)
     {
-        WriteLog (lsINFO, PaymentTransactor) << "Payment: Malformed transaction: Partial payment specified for XPR to XPR.";
+        WriteLog (lsINFO, PaymentTransactor) << "Payment: Malformed transaction: Partial payment specified for XPS to XPS.";
 
-        return temBAD_SEND_XPR_PARTIAL;
+        return temBAD_SEND_XPS_PARTIAL;
     }
-    else if (bXPRDirect && bLimitQuality)
+    else if (bXPSDirect && bLimitQuality)
     {
-        WriteLog (lsINFO, PaymentTransactor) << "Payment: Malformed transaction: Limit quality specified for XPR to XPR.";
+        WriteLog (lsINFO, PaymentTransactor) << "Payment: Malformed transaction: Limit quality specified for XPS to XPS.";
 
-        return temBAD_SEND_XPR_LIMIT;
+        return temBAD_SEND_XPS_LIMIT;
     }
-    else if (bXPRDirect && bNoRippleDirect)
+    else if (bXPSDirect && bNoRippleDirect)
     {
-        WriteLog (lsINFO, PaymentTransactor) << "Payment: Malformed transaction: No ripple direct specified for XPR to XPR.";
+        WriteLog (lsINFO, PaymentTransactor) << "Payment: Malformed transaction: No ripple direct specified for XPS to XPS.";
 
-        return temBAD_SEND_XPR_NO_DIRECT;
+        return temBAD_SEND_XPS_NO_DIRECT;
     }
 
     SLE::pointer    sleDst  = mEngine->entryCache (ltACCOUNT_ROOT, Ledger::getAccountRootIndex (uDstAccountID));
@@ -153,7 +153,7 @@ TER PaymentTransactor::doApply ()
             WriteLog (lsINFO, PaymentTransactor) << "Payment: Delay transaction: Destination account does not exist. Insufficient payment to create account.";
 
             // Another transaction could create the account and then this transaction would succeed.
-            return tecNO_DST_INSUF_XPR;
+            return tecNO_DST_INSUF_XPS;
         }
 
         // Create the account.
@@ -221,7 +221,7 @@ TER PaymentTransactor::doApply ()
     }
     else
     {
-        // Direct XPR payment.
+        // Direct XPS payment.
 
         const uint32    uOwnerCount     = mTxnAccount->getFieldU32 (sfOwnerCount);
         const uint64    uReserve        = mEngine->getLedger ()->getReserve (uOwnerCount);

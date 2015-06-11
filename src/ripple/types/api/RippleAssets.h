@@ -104,7 +104,7 @@ public:
 
 /** Ordered comparison.
     The assets are ordered first by currency and then by issuer,
-    if the currency is not XPR.
+    if the currency is not XPS.
 */
 template <bool LhsByValue, bool RhsByValue>
 int compare (RippleAssetType <LhsByValue> const& lhs,
@@ -185,7 +185,7 @@ RippleAsset make_asset (Json::Value json,
 
 //------------------------------------------------------------------------------
 
-/** Returns an asset specifier that represents XPR. */
+/** Returns an asset specifier that represents XPS. */
 inline RippleAssetRef xrp_asset ()
 {
     static RippleAsset asset (RippleCurrency (0), RippleIssuer (0));

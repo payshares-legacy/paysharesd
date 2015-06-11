@@ -26,7 +26,7 @@ namespace ripple {
 // TODO: Check permissions on config file before using it.
 //
 
-// Fees are in XPR.
+// Fees are in XPS.
 #define DEFAULT_FEE_DEFAULT             10
 #define DEFAULT_FEE_ACCOUNT_RESERVE     200*SYSTEM_CURRENCY_PARTS
 #define DEFAULT_FEE_OWNER_RESERVE       50*SYSTEM_CURRENCY_PARTS

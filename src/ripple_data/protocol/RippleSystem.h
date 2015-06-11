@@ -34,7 +34,7 @@ public:
 
     static char const* getCurrencyCode ()
     {
-        return "XPR";
+        return "XPS";
     }
 
     static char const* getCurrencyCodeRipple ()
@@ -54,7 +54,7 @@ public:
 //         It will be necessary to rewrite some of them to use string streams.
 //
 #define SYSTEM_NAME                 "payshares"
-#define SYSTEM_CURRENCY_CODE        "XPR"
+#define SYSTEM_CURRENCY_CODE        "XPS"
 #define SYSTEM_CURRENCY_PRECISION   6
 
 } // ripple

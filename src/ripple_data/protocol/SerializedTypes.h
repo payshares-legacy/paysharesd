@@ -54,10 +54,10 @@ static inline const uint160& get_u160_one ()
 }
 
 // VFALCO TODO replace these with language constructs
-#define CURRENCY_XPR        get_u160_zero()
+#define CURRENCY_XPS        get_u160_zero()
 #define CURRENCY_ONE        get_u160_one()                  // Used as a place holder.
-#define CURRENCY_BAD        uint160(0x5354520000000000)     // Do not allow XPR as an IOU currency.
-#define ACCOUNT_XPR         get_u160_zero()
+#define CURRENCY_BAD        uint160(0x5354520000000000)     // Do not allow XPS as an IOU currency.
+#define ACCOUNT_XPS         get_u160_zero()
 #define ACCOUNT_ONE         get_u160_one()                  // Used as a place holder.
 
 //------------------------------------------------------------------------------
@@ -562,7 +562,7 @@ public:
         return mValue ? (mIsNegative ? -1 : 1) : 0;
     }
 
-    // When the currency is XPR, the value in raw units. S=signed
+    // When the currency is XPS, the value in raw units. S=signed
     std::uint64_t getNValue () const
     {
         if (!mIsNative) throw std::runtime_error ("not native");
@@ -765,11 +765,11 @@ public:
 
 private:
     uint160 mCurrency;      // Compared by ==. Always update mIsNative.
-    uint160 mIssuer;        // Not compared by ==. 0 for XPR.
+    uint160 mIssuer;        // Not compared by ==. 0 for XPS.
 
     std::uint64_t  mValue;
     int            mOffset;
-    bool           mIsNative;      // Always !mCurrency. Native is XPR.
+    bool           mIsNative;      // Always !mCurrency. Native is XPS.
     bool           mIsNegative;
 
     void canonicalize ();

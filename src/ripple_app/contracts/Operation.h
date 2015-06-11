@@ -332,7 +332,7 @@ public:
     }
 };
 
-class SendXPROp  : public Operation
+class SendXPSOp  : public Operation
 {
 public:
     bool work (Interpreter* interpreter)

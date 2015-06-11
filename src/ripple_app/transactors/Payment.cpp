@@ -45,7 +45,7 @@ TER PaymentTransactor::doApply ()
                                         saDstAmount < zero);
     uint160 const uSrcCurrency = saMaxAmount.getCurrency ();
     uint160 const uDstCurrency = saDstAmount.getCurrency ();
-    bool const bXPRDirect = uSrcCurrency.isZero () && uDstCurrency.isZero ();
+    bool const bXPSDirect = uSrcCurrency.isZero () && uDstCurrency.isZero ();
 
 	
     m_journal.trace <<
@@ -108,33 +108,33 @@ TER PaymentTransactor::doApply ()
 
         return temREDUNDANT_SEND_MAX;
     }
-    else if (bXPRDirect && bMax)
+    else if (bXPSDirect && bMax)
     {
         m_journal.trace <<
-            "Malformed transaction: SendMax specified for XPR to XPR.";
+            "Malformed transaction: SendMax specified for XPS to XPS.";
 
-        return temBAD_SEND_XPR_MAX;
+        return temBAD_SEND_XPS_MAX;
     }
-    else if (bXPRDirect && bPaths)
+    else if (bXPSDirect && bPaths)
     {
         m_journal.trace <<
-            "Malformed transaction: Paths specified for XPR to XPR.";
+            "Malformed transaction: Paths specified for XPS to XPS.";
 
-        return temBAD_SEND_XPR_PATHS;
+        return temBAD_SEND_XPS_PATHS;
     }
-    else if (bXPRDirect && bLimitQuality)
+    else if (bXPSDirect && bLimitQuality)
     {
         m_journal.trace <<
-            "Malformed transaction: Limit quality specified for XPR to XPR.";
+            "Malformed transaction: Limit quality specified for XPS to XPS.";
 
-        return temBAD_SEND_XPR_LIMIT;
+        return temBAD_SEND_XPS_LIMIT;
     }
-    else if (bXPRDirect && bNoRippleDirect)
+    else if (bXPSDirect && bNoRippleDirect)
     {
         m_journal.trace <<
-            "Malformed transaction: No ripple direct specified for XPR to XPR.";
+            "Malformed transaction: No ripple direct specified for XPS to XPS.";
 
-        return temBAD_SEND_XPR_NO_DIRECT;
+        return temBAD_SEND_XPS_NO_DIRECT;
     }
 
     SLE::pointer sleDst (mEngine->entryCache (
@@ -162,7 +162,7 @@ TER PaymentTransactor::doApply ()
 
             // Another transaction could create the account and then this
             // transaction would succeed.
-            return tecNO_DST_INSUF_XPR;
+            return tecNO_DST_INSUF_XPS;
         }
 
         // Create the account.
@@ -249,7 +249,7 @@ TER PaymentTransactor::doApply ()
     }
     else
     {
-        // Direct XPR payment.
+        // Direct XPS payment.
 
         std::uint32_t const uOwnerCount (mTxnAccount->getFieldU32 (sfOwnerCount));
         std::uint64_t const uReserve (mEngine->getLedger ()->getReserve (uOwnerCount));

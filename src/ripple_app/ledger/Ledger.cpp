@@ -1102,7 +1102,7 @@ Json::Value Ledger::getJson (int options)
     }
 
     if (mTransactionMap && (bFull
-                            || is_bit_set (options, LEDGER_JSON_DUMP_TXPR)
+                            || is_bit_set (options, LEDGER_JSON_DUMP_TXPS)
                             || is_bit_set (options, LEDGER_JSON_BULK)))
     {
         auto k = jss::transactions;
@@ -1665,7 +1665,7 @@ std::vector<uint256> Ledger::getLedgerAmendments ()
     return usAmendments;
 }
 
-// XPR to XPR not allowed.
+// XPS to XPS not allowed.
 // Currencies must have appropriate issuer.
 // Currencies or accounts must differ.
 bool Ledger::isValidBook (const uint160& uTakerPaysCurrency, const uint160& uTakerPaysIssuerID,
@@ -1673,30 +1673,30 @@ bool Ledger::isValidBook (const uint160& uTakerPaysCurrency, const uint160& uTak
 {
     if (uTakerPaysCurrency.isZero ())
     {
-        // XPR in
+        // XPS in
 
-        if (uTakerPaysIssuerID.isNonZero ())    // XPR cannot have an issuer
+        if (uTakerPaysIssuerID.isNonZero ())    // XPS cannot have an issuer
             return false;
 
-        if (uTakerGetsCurrency.isZero ())       // XPR to XPR not allowed
+        if (uTakerGetsCurrency.isZero ())       // XPS to XPS not allowed
             return false;
 
-        if (uTakerGetsIssuerID.isZero ())       // non-XPR must have issuer
+        if (uTakerGetsIssuerID.isZero ())       // non-XPS must have issuer
             return false;
 
         return true;
     }
 
-    // non-XPR in
-    if (uTakerPaysIssuerID.isZero ())           // non-XPR must have issuer
+    // non-XPS in
+    if (uTakerPaysIssuerID.isZero ())           // non-XPS must have issuer
         return false;
 
-    if (uTakerGetsCurrency.isZero ())           // non-XPR to XPR
+    if (uTakerGetsCurrency.isZero ())           // non-XPS to XPS
     {
-        if (uTakerGetsIssuerID.isNonZero ())    // XPR cannot have issuer
+        if (uTakerGetsIssuerID.isNonZero ())    // XPS cannot have issuer
             return false;
     }
-    else                                        // non-XPR to non-XPR
+    else                                        // non-XPS to non-XPS
     {
         if ((uTakerPaysCurrency == uTakerGetsCurrency) && (uTakerGetsIssuerID == uTakerPaysIssuerID))
             return false;                       // Input and output cannot be identical
