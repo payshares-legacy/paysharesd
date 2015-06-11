@@ -43,7 +43,7 @@ an issue number.
 # Additional Resources
 
 * [Bug tracker (Github)](https://github.com/payshares/paysharesd/issues)
-* [Explore the API](https://www.payshares.org/api/)
+* [Explore the API](https://www.payshares.co/api/)
 * [Readme for paysharesd](https://github.com/payshares/paysharesd/blob/master/README.md)
 * #payshares-dev IRC channel on freenode.org
 

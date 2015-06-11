@@ -416,7 +416,7 @@ public:
         // If no IPs are specified, use the Payshares.org round robin
         // pool to get some servers to insert into the boot cache. 
         //if (bootstrapIps.empty ())
-        //    bootstrapIps.push_back ("s.payshares.org 51235");
+        //    bootstrapIps.push_back ("s.payshares.co 51235");
 
         if (!bootstrapIps.empty ())
         {

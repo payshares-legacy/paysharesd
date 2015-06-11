@@ -47,5 +47,5 @@ Payshares is open source and permissively licensed under the ISC license. See th
 LICENSE file for more details.
 
 ### For more information:
-* https://www.payshares.org
-* https://www.payshares.org/developers/
+* https://www.payshares.co
+* https://www.payshares.co/developers/
