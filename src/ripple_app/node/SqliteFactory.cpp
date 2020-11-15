@@ -31,7 +31,7 @@ static const char* s_nodeStoreDBInit [] =
 
     "BEGIN TRANSACTION;",
 
-    "CREATE TABLE CommittedObjects (				\
+    "CREATE TABLE IF NOT EXISTS CommittedObjects (				\
         Hash		CHARACTER(64) PRIMARY KEY,		\
         ObjType		CHAR(1)	NOT	NULL,				\
         LedgerIndex	BIGINT UNSIGNED,				\
