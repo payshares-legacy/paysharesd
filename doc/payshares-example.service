@@ -1,10 +1,10 @@
 [Unit]
-Description=Stellar Peer-to-Peer Network Daemon
+Description=Payshares Peer-to-Peer Network Daemon
  
 [Service]
 Type=simple
 User=nobody
-ExecStart=/usr/bin/stellard --conf=/etc/stellard/stellard.cfg
+ExecStart=/usr/bin/paysharesd --conf=/etc/paysharesd/paysharesd.cfg
  
 [Install]
 WantedBy=multi-user.target
