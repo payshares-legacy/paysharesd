@@ -123,4 +123,4 @@ loss
 192.168.0.5
 
 [validators]
-payshares.co
+payshares.org
