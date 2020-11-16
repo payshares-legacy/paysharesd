@@ -20,6 +20,5 @@
 #
 
 [validators]
-n9KPnVLn7ewVzHvn218DcEYsnWLzKerTDwhpofhk4Ym1RUq4TeGw	first
-n9LFzWuhKNvXStHAuemfRKFVECLApowncMAM5chSCL9R5ECHGN4V	second
-n94rSdgTyBNGvYg8pZXGuNt59Y5bGAZGxbxyvjDaqD9ceRAgD85P	third
+n3pYRu4G6iGZciPbSfD1WtK7XqZciLMTCzDCMufmaPUf49ta4z2 VLD1
+nfp4HeeiLXt1NvJc7ZFYnUxCZFipwgNLAbZfMwpZhR6MdrvZbm1 VLD2
