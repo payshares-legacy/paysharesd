@@ -42,15 +42,15 @@ script:
   - scons
   - ldd ./build/paysharesd
   # Run unittests (under gdb)
-  - | # create gdb script
-    echo "set env MALLOC_CHECK_=3" > script.gdb
-    echo "run" >> script.gdb
-    echo "backtrace full" >> script.gdb
+  #- | # create gdb script
+  #  echo "set env MALLOC_CHECK_=3" > script.gdb
+  #  echo "run" >> script.gdb
+  #  echo "backtrace full" >> script.gdb
     # gdb --help
-  - cat script.gdb | gdb --ex 'set print thread-events off' --return-child-result --args ./build/paysharesd --unittest
+  #- cat script.gdb | gdb --ex 'set print thread-events off' --return-child-result --args ./build/paysharesd --unittest
   # Run integration tests
-  - npm install
-  - npm test
+  #- npm install
+  #- npm test
 
 notifications:
   email:
