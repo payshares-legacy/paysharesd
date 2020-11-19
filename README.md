@@ -1,3 +1,5 @@
+![Payshares](/assets/payshares.jpg)
+
 paysharesd - Payshares P2P server
 =================================
 
