@@ -1,5 +1,13 @@
 ![Payshares](/assets/payshares.jpg)
 
+Payshares is an open source protocol for exchange, payments, and remittance forged by Kedia.  Its base components include an open distributed ledger system and native currency payshare units known as XPS.  The Payshares Platform enhances the cryptocurrency industry with near instant extremely low cost transactions with great risk reduction for all participants.
+
+The Payshares Ledger holds all account information, transactions, and offers available on the network.  Participants on the network are able to reach consensus in average of one to five seconds.  Consensus allows for the network to operate in a distributed fashion.
+
+Everyone is able to participate and contribute computational power to the network on standard hardware.  Standard Servers reduce storage requirements by maintaining a recent snapshot of the ledger.  Trusted Nodes such as those in operation by Kedia will maintain the full ledger.
+
+Every feature currently available in its competitors is also currently available for Payshares.  Unique to Payshares is the expansion capabilities of its distributed exchange, opening up asset management opportunities previously only achievable by centralized financial systems.
+
 paysharesd - Payshares P2P server
 =================================
 
