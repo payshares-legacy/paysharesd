@@ -58,3 +58,5 @@ For more information:
 * https://twitter.com/payshares
 * https://business.facebook.com/payshares
 * https://reddit.com/r/payshares
+* https://t.me/payshares
+* https://t.me/paysharestalk
