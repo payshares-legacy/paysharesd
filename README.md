@@ -66,3 +66,32 @@ For more information:
 * https://reddit.com/r/payshares
 * https://t.me/payshares
 * https://t.me/paysharestalk
+
+Payshares Genesis Ledger:
+-------------------------
+
+~~~
+{
+   "result" : {
+      "ledger" : {
+         "accepted" : true,
+         "account_hash" : "CD61677B53191E1FDCA8861E68B11688B86260A5DE55429942FB79EE3D066BCF",
+         "close_time" : 559688910,
+         "close_time_human" : "2017-Sep-25 21:08:30",
+         "close_time_resolution" : 30,
+         "closed" : true,
+         "fee_pool" : "0",
+         "hash" : "F5524981DB75D730771449FAEF7ED46F621193638F96B2DDAFF456B7925EE46A",
+         "inflate_seq" : "1",
+         "ledger_hash" : "F5524981DB75D730771449FAEF7ED46F621193638F96B2DDAFF456B7925EE46A",
+         "ledger_index" : "1",
+         "parent_hash" : "0000000000000000000000000000000000000000000000000000000000000000",
+         "seqNum" : "1",
+         "totalCoins" : "100000000000000000",
+         "total_coins" : "100000000000000000",
+         "transaction_hash" : "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "status" : "success"
+   }
+}
+~~~
