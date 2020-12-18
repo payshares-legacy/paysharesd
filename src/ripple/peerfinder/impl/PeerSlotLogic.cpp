@@ -2,6 +2,7 @@
 #include "ripple_core/functional/Config.h"
 #include "PeerSlotLogic.h"
 #include "ripple/peerfinder/impl/iosformat.h"
+#include <boost/asio.hpp>
 
 namespace ripple {
 	namespace PeerFinder {
