@@ -143,7 +143,7 @@ public:
         Severity const m_level;
         bool const m_active;
         std::ostringstream mutable m_ostream;
-        bool m_toOutputWindow;
+        bool m_toOutputWindow=false;
     };
 
     //--------------------------------------------------------------------------
