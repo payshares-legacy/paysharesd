@@ -1,4 +1,3 @@
-
 # PeerFinder
 
 ## Introduction
@@ -31,23 +30,21 @@ slots_.
 
 PeerFinder has these responsibilities
 
-* Maintain a persistent set of endpoint addresses suitable for bootstrapping
-  into the peer to peer overlay, ranked by relative locally observed utility.
+  * Maintain a persistent set of endpoint addresses suitable for bootstrapping into the peer to peer overlay, ranked by relative locally observed utility.
 
-* Send and receive protocol messages for discovery of endpoint addresses.
+  * Send and receive protocol messages for discovery of endpoint addresses.
 
-* Provide endpoint addresses to new peers that need them.
+  * Provide endpoint addresses to new peers that need them.
 
-* Maintain connections to a configured set of fixed peers.
+  * Maintain connections to a configured set of fixed peers.
 
-* Impose limits on the various slots consumed by peer connections.
+  * Impose limits on the various slots consumed by peer connections.
 
-* Initiate outgoing connection attempts to endpoint addresses to maintain the
-  overlay connectivity and fixed peer policies.
+  * Initiate outgoing connection attempts to endpoint addresses to maintain the overlay connectivity and fixed peer policies.
 
-* Verify the connectivity of neighbors who advertise inbound connection slots.
+  * Verify the connectivity of neighbors who advertise inbound connection slots.
 
-* Prevent duplicate connections and connections to self.
+  * Prevent duplicate connections and connections to self.
 
 ---
 
