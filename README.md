@@ -10,6 +10,7 @@ paysharesd - Payshares P2P server
 =================================
 
 [![Build Status](https://travis-ci.org/Payshares/paysharesd.svg?branch=master)](https://travis-ci.org/Payshares/paysharesd)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/09542ea53aae4c3ba0559cd0dc2a8186)](https://www.codacy.com/gh/payshares-legacy/paysharesd/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=payshares-legacy/paysharesd&amp;utm_campaign=Badge_Grade)
 
 This is the repository for Payshares's `paysharesd`, reference P2P server.
 
