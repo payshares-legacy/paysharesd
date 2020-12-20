@@ -123,7 +123,7 @@ void MemoryBlock::setSize (const size_t newSize, const bool initialiseToZero)
 {
     if (size != newSize)
     {
-        if (newSize <= 0)
+        if (newSize == 0)
         {
             data.free_up();
             size = 0;
