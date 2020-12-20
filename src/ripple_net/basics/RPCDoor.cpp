@@ -62,7 +62,7 @@ public:
                 boost::ref (m_sslContext->get ()),
                     boost::ref (m_rpcServerHandler)));
 
-        mAcceptor.set_option (boost::asio::ip::tcp::acceptor::reuse_address (true));
+        mAcceptor.set_option (boost::asio::ip::tcp::acceptor::reuse_address (fasle));
 
         mAcceptor.async_accept (new_connection->getRawSocket (), 
             new_connection->getRemoteEndpoint (),
