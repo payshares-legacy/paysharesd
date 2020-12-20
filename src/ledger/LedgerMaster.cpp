@@ -5,6 +5,7 @@
 #include "ripple_basics/ripple_basics.h"
 #include "ripple_app/main/LoadManager.h"
 #include "LedgerEntry.h"
+#include <stdexcept>
 
 using namespace ripple; // needed for logging...
 
@@ -63,17 +64,25 @@ namespace payshares
     void LedgerMaster::beginClosingLedger()
     {
         // ready to make changes
-        mCurrentDB.beginTransaction();
-        assert(mCurrentDB.getTransactionLevel() == 1); // should be top level transaction
+        try{
+            mCurrentDB.beginTransaction();
+            if(mCurrentDB.getTransactionLevel() != 1){ throw std::runtime_error("Error: mCurrentDB.getTransactionLevel() should be top level transaction");} 
+        } catch (...) {
+            cout << 'LedgerMaster Exception in beginClosingLedger() : PaysharesD is now shutting down.\n';
+            return 1;
+        }
     }
 
     bool  LedgerMaster::commitLedgerClose(ripple::Ledger::pointer ledger)
     {
         bool res = false;
         CanonicalLedgerForm::pointer newCLF;
-
-        assert(ledger->getParentHash() == mLastLedgerHash); // should not happen
-
+        try{
+            if(mledger->getParentHash() != mLastLedgerHash){ throw std::runtime_error("Error: The parent hash of the current ledger does not equal the hash of the previous ledger.");} 
+        } catch (...) {
+            cout << 'LedgerMaster Exception in commitLedgerClose(ripple::Ledger::pointer ledger) : PaysharesD is now shutting down.\n';
+            return 1;
+        }
         try
         {
             CanonicalLedgerForm::pointer nl(new LegacyCLF(this, ledger));
@@ -108,8 +117,12 @@ namespace payshares
 
     void LedgerMaster::setLastClosedLedger(CanonicalLedgerForm::pointer ledger)
     {
-        // should only be done outside of transactions, to guarantee state reflects what is on disk
-        assert(mCurrentDB.getTransactionLevel() == 0);
+        try{
+            if(mCurrentDB.getTransactionLevel() != 0){ throw std::runtime_error("Error: setLastClosedLedger should only be done outside of transactions, to guarantee state reflects what is on disk");} 
+        } catch (...) {
+            cout << 'LedgerMaster Exception in setLastClosedLedger(CanonicalLedgerForm::pointer ledger) : PaysharesD is now shutting down.\n';
+            return 1;
+        }
         mCurrentCLF = ledger;
         mLastLedgerHash = ledger->getHash();
         WriteLog(ripple::lsINFO, ripple::Ledger) << "Store at " << mLastLedgerHash;
