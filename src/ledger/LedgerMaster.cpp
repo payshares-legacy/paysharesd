@@ -69,7 +69,7 @@ namespace payshares
             if(mCurrentDB.getTransactionLevel() != 1){ throw std::runtime_error("Error: mCurrentDB.getTransactionLevel() should be top level transaction");} 
         } catch (...) {
             cout << "LedgerMaster Exception in beginClosingLedger() : PaysharesD is now shutting down.";
-            return 1;
+            exit(1);
         }
     }
 
@@ -81,7 +81,7 @@ namespace payshares
             if(mledger->getParentHash() != mLastLedgerHash){ throw std::runtime_error("Error: The parent hash of the current ledger does not equal the hash of the previous ledger.");} 
         } catch (...) {
             cout << "LedgerMaster Exception in commitLedgerClose(ripple::Ledger::pointer ledger) : PaysharesD is now shutting down.";
-            return 1;
+            exit(1);
         }
         try
         {
@@ -121,7 +121,7 @@ namespace payshares
             if(mCurrentDB.getTransactionLevel() != 0){ throw std::runtime_error("Error: setLastClosedLedger should only be done outside of transactions, to guarantee state reflects what is on disk");} 
         } catch (...) {
             cout << "LedgerMaster Exception in setLastClosedLedger(CanonicalLedgerForm::pointer ledger) : PaysharesD is now shutting down.";
-            return 1;
+            exit(1);
         }
         mCurrentCLF = ledger;
         mLastLedgerHash = ledger->getHash();
