@@ -326,7 +326,7 @@ beast::StringPairArray parseDelimitedKeyValueString (beast::String parameters,
 class StringUtilities_test : public beast::unit_test::suite
 {
 public:
-    void testUnHexSuccess (std::string strIn, std::string strExpected)
+    void testUnHexSuccess (const std::string& strIn, std::string strExpected)
     {
         std::string strOut;
 
@@ -337,7 +337,7 @@ public:
             "strUnHex: parsing doesn't produce expected result");
     }
 
-    void testUnHexFailure (std::string strIn)
+    void testUnHexFailure (const std::string& strIn)
     {
         std::string strOut;
 
